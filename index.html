@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KAASHI — Taste of Banaras in Dublin</title>
-    <meta name="description" content="Authentic Litti Chokha & Baati Chokha delivered fresh in Dublin. Homemade Bihari cuisine, just like back home.">
+    <meta name="description" content="Authentic Litti Chokha delivered fresh in Dublin. Homemade Bihari cuisine, just like back home.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,24 +16,27 @@
         }
 
         :root {
-            --saffron: #FF6B35;
-            --deep-red: #C41E3A;
-            --cream: #FFF8F0;
-            --gold: #D4A574;
-            --dark: #2D1810;
+            --dark-brown: #301A0A;
+            --rich-brown: #653314;
+            --warm-brown: #744924;
+            --burnt-orange: #915122;
+            --copper: #A3643C;
+            --gold: #D19D4C;
+            --cream: #CCA584;
+            --light-cream: #F5E6D3;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--cream);
-            color: var(--dark);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--dark-brown);
+            color: var(--light-cream);
             line-height: 1.6;
         }
 
-        /* Hero Section */
+        /* Hero Section - Poster Style */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--deep-red) 0%, #8B0000 100%);
+            background: linear-gradient(180deg, var(--dark-brown) 0%, var(--rich-brown) 50%, var(--dark-brown) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -41,258 +44,227 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            overflow: hidden;
         }
 
+        /* Decorative border like poster */
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            pointer-events: none;
             opacity: 0.5;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
+            max-width: 500px;
+        }
+
+        /* Decorative element */
+        .decorative-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .decorative-line span {
+            color: var(--gold);
+            font-size: 1.5rem;
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 4.5rem;
             font-weight: 700;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.2em;
-        }
-
-        .logo span {
             color: var(--gold);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 0.3em;
+            margin-bottom: 0.25rem;
         }
 
         .tagline {
+            font-size: 1.3rem;
+            color: var(--cream);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            font-style: italic;
+        }
+
+        /* Food image area */
+        .food-showcase {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .food-showcase img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        .food-placeholder {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            background: linear-gradient(135deg, var(--burnt-orange), var(--rich-brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 1.5rem 0;
+        }
+
+        .menu-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item {
+            margin: 1rem 0;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.2);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item-name {
+            font-size: 1.4rem;
+            color: var(--light-cream);
+            font-weight: 600;
+        }
+
+        .menu-item-price {
+            font-family: 'Cinzel', serif;
             font-size: 1.5rem;
             color: var(--gold);
-            font-weight: 500;
-            margin-bottom: 2rem;
-            letter-spacing: 0.1em;
+            font-weight: 700;
         }
 
-        .hero-description {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin-bottom: 3rem;
+        .menu-item-desc {
+            font-size: 1rem;
+            color: var(--cream);
+            opacity: 0.8;
+            margin-top: 0.25rem;
         }
 
+        .addons {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        .addons-title {
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+        }
+
+        .addon-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            font-size: 1rem;
+            color: var(--cream);
+        }
+
+        .vegan-badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #8BC34A;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* Info strip */
+        .info-strip {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--cream);
+        }
+
+        .info-strip p {
+            margin: 0.4rem 0;
+        }
+
+        .info-strip strong {
+            color: var(--gold);
+        }
+
+        /* CTA Button */
         .cta-button {
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
             background: #25D366;
             color: white;
-            padding: 1.25rem 2.5rem;
+            padding: 1.1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
             font-weight: 600;
             transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            margin-top: 2rem;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
         }
 
         .cta-button svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        /* Menu Section */
-        .menu {
-            padding: 5rem 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            color: var(--deep-red);
-            margin-bottom: 3rem;
-        }
-
-        .menu-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .menu-item {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .menu-item.featured {
-            background: linear-gradient(135deg, var(--saffron), var(--deep-red));
-            color: white;
-        }
-
-        .menu-item.featured .item-price {
-            color: var(--gold);
-        }
-
-        .item-details h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-details p {
-            opacity: 0.8;
-            font-size: 0.95rem;
-        }
-
-        .item-price {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--deep-red);
-        }
-
-        /* Add-ons */
-        .addons {
-            background: var(--dark);
-            color: white;
-            padding: 4rem 2rem;
-        }
-
-        .addons .section-title {
-            color: var(--gold);
-        }
-
-        .addon-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .addon-item {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            min-width: 150px;
-        }
-
-        .addon-item h4 {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
-
-        .addon-item p {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        /* Info Section */
-        .info {
-            padding: 5rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .info-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .info-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .info-card h3 {
-            color: var(--deep-red);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--deep-red);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-
-        footer .logo {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            transition: background 0.3s;
-        }
-
-        .social-links a:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .vegan-badge {
-            display: inline-block;
-            background: #4CAF50;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
+            width: 26px;
+            height: 26px;
         }
 
         /* Floating WhatsApp */
         .whatsapp-float {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             background: #25D366;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -307,35 +279,86 @@
         }
 
         .whatsapp-float svg {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
         }
 
-        @media (max-width: 600px) {
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--cream);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
             .logo {
                 font-size: 3rem;
+                letter-spacing: 0.2em;
             }
             .tagline {
                 font-size: 1.1rem;
             }
-            .menu-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
+            .food-placeholder, .food-showcase img {
+                width: 220px;
+                height: 220px;
+            }
+            .hero::before {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="logo">KAASH<span>I</span></h1>
+            <h1 class="logo">KAASHI</h1>
             <p class="tagline">Taste of Banaras in Dublin</p>
-            <p class="hero-description">
-                Authentic homemade Litti Chokha — smoky, spicy, and made with love. 
-                Fresh weekend deliveries across Dublin.
-            </p>
+            
+            <div class="decorative-line"><span>✦</span></div>
+            
+            <div class="food-showcase">
+                <div class="food-placeholder">🔥</div>
+            </div>
+
+            <div class="menu-section">
+                <h2 class="menu-title">— MENU —</h2>
+                
+                <div class="menu-item">
+                    <div class="menu-item-name">Litti Chokha Platter</div>
+                    <div class="menu-item-price">€12</div>
+                    <div class="menu-item-desc">Smoky litti • spicy chokha • fresh salad</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-item-name">Kaashi Combo</div>
+                    <div class="menu-item-price">€15</div>
+                    <div class="menu-item-desc">Platter + Homemade Kheer</div>
+                </div>
+
+                <div class="addons">
+                    <div class="addons-title">ADD-ONS</div>
+                    <div class="addon-row"><span>Extra Litti</span><span>€2</span></div>
+                    <div class="addon-row"><span>Kheer</span><span>€3.50</span></div>
+                    <div class="addon-row"><span>Extra Ghee</span><span>€1</span></div>
+                </div>
+
+                <div class="vegan-badge">🌱 Vegan option available</div>
+            </div>
+
+            <div class="info-strip">
+                <p>📍 Based in <strong>Dublin 18</strong></p>
+                <p>🚚 <strong>FREE delivery</strong> over €20</p>
+                <p>⏰ Order by <strong>Friday 9 PM</strong></p>
+                <p>📦 Delivery: <strong>Saturday & Sunday</strong></p>
+                <p>💳 <strong>Revolut</strong> or <strong>Cash</strong></p>
+            </div>
+
             <a href="https://wa.me/353892117502?text=Hi!%20I'd%20like%20to%20order%20from%20KAASHI" class="cta-button">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 Order on WhatsApp
@@ -343,85 +366,8 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section class="menu">
-        <h2 class="section-title">🍽️ Our Menu</h2>
-        <div class="menu-grid">
-            <div class="menu-item featured">
-                <div class="item-details">
-                    <h3>Litti Chokha Platter</h3>
-                    <p>Smoky litti + spicy chokha + fresh salad</p>
-                    <span class="vegan-badge">🌱 Vegan option available</span>
-                </div>
-                <div class="item-price">€11.99</div>
-            </div>
-            <div class="menu-item">
-                <div class="item-details">
-                    <h3>✨ Kaashi Combo</h3>
-                    <p>Platter + Homemade Kheer (rice pudding)</p>
-                </div>
-                <div class="item-price">€14.99</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Add-ons Section -->
-    <section class="addons">
-        <h2 class="section-title">➕ Add-ons</h2>
-        <div class="addon-grid">
-            <div class="addon-item">
-                <h4>Extra Litti</h4>
-                <p>€2</p>
-            </div>
-            <div class="addon-item">
-                <h4>Kheer</h4>
-                <p>€3.50</p>
-            </div>
-            <div class="addon-item">
-                <h4>Extra Ghee</h4>
-                <p>€1</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Info Section -->
-    <section class="info">
-        <h2 class="section-title">How It Works</h2>
-        <div class="info-grid">
-            <div class="info-card">
-                <div class="icon">📍</div>
-                <h3>Based in Dublin 18</h3>
-                <p>Homemade with love in Sandyford</p>
-            </div>
-            <div class="info-card">
-                <div class="icon">🚚</div>
-                <h3>Free Delivery</h3>
-                <p>On orders over €20 (Dublin only)</p>
-            </div>
-            <div class="info-card">
-                <div class="icon">⏰</div>
-                <h3>Order by Friday 9 PM</h3>
-                <p>Delivery on Saturday & Sunday</p>
-            </div>
-            <div class="info-card">
-                <div class="icon">💳</div>
-                <h3>Easy Payment</h3>
-                <p>Revolut or Cash on Delivery</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="logo">KAASHI</div>
-        <p>Bringing the flavours of Banaras to Dublin</p>
-        <div class="social-links">
-            <a href="https://wa.me/353892117502">📱 WhatsApp</a>
-            <a href="#">📸 Instagram</a>
-        </div>
-        <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
-            ⚠️ Please inform us of any allergies when ordering.
-        </p>
+        ⚠️ Please inform us of any allergies when ordering
     </footer>
 
     <!-- Floating WhatsApp Button -->
