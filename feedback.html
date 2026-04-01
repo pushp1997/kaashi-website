@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback — KAASHI</title>
+    <meta name="description" content="Share your feedback to help us improve KAASHI. Your opinion matters!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-brown: #301A0A;
+            --rich-brown: #653314;
+            --warm-brown: #744924;
+            --burnt-orange: #915122;
+            --copper: #A3643C;
+            --gold: #D19D4C;
+            --cream: #CCA584;
+            --light-cream: #F5E6D3;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: linear-gradient(180deg, var(--dark-brown) 0%, var(--rich-brown) 50%, var(--dark-brown) 100%);
+            color: var(--light-cream);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .decorative-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .decorative-line span {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--cream);
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Form Styles */
+        .feedback-form {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(209, 157, 76, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 1.15rem;
+            color: var(--light-cream);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .required {
+            color: var(--gold);
+        }
+
+        /* Star Rating */
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 2.2rem;
+            color: rgba(209, 157, 76, 0.3);
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: var(--gold);
+        }
+
+        .star-rating label:hover {
+            transform: scale(1.15);
+        }
+
+        /* Text Input & Textarea */
+        .text-input,
+        .textarea {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(209, 157, 76, 0.3);
+            border-radius: 8px;
+            color: var(--light-cream);
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .text-input:focus,
+        .textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .text-input::placeholder,
+        .textarea::placeholder {
+            color: var(--cream);
+            opacity: 0.6;
+        }
+
+        .textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .radio-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(209, 157, 76, 0.3);
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s;
+        }
+
+        .radio-option .radio-circle::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .radio-option input:checked + .radio-circle {
+            border-color: var(--gold);
+        }
+
+        .radio-option input:checked + .radio-circle::after {
+            opacity: 1;
+        }
+
+        .radio-option span:last-child {
+            font-size: 1.05rem;
+            color: var(--light-cream);
+        }
+
+        /* Checkbox Options */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            border: 1px solid rgba(209, 157, 76, 0.2);
+            transition: all 0.2s;
+        }
+
+        .checkbox-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .checkbox-option input {
+            display: none;
+        }
+
+        .checkbox-option input:checked + span {
+            color: var(--gold);
+        }
+
+        .checkbox-option input:checked ~ .check-icon {
+            opacity: 1;
+        }
+
+        .checkbox-option span {
+            font-size: 1rem;
+            color: var(--cream);
+            transition: color 0.2s;
+        }
+
+        .check-icon {
+            opacity: 0;
+            color: var(--gold);
+            transition: opacity 0.2s;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem 2rem;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: var(--gold);
+            color: var(--dark-brown);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(209, 157, 76, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(209, 157, 76, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Privacy Note */
+        .privacy-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        .privacy-note span {
+            color: var(--gold);
+        }
+
+        /* Thank You State */
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .thank-you.active {
+            display: block;
+        }
+
+        .thank-you-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .thank-you h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .thank-you p {
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--cream);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .logo {
+                font-size: 2rem;
+            }
+            .feedback-form {
+                padding: 1.5rem;
+            }
+            .star-rating label {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="logo">KAASHI</a>
+            <div class="decorative-line"><span>✦</span></div>
+            <h1 class="page-title">YOUR FEEDBACK</h1>
+            <p class="intro-text">Help us bring the best of Banaras to your table.<br>Your honest feedback shapes our journey.</p>
+        </header>
+
+        <form class="feedback-form" id="feedbackForm">
+            <!-- Overall Rating -->
+            <div class="form-group">
+                <label class="form-label">How was your overall experience? <span class="required">*</span></label>
+                <div class="star-rating">
+                    <input type="radio" name="rating" id="star5" value="5" required>
+                    <label for="star5">★</label>
+                    <input type="radio" name="rating" id="star4" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" name="rating" id="star3" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" name="rating" id="star2" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" name="rating" id="star1" value="1">
+                    <label for="star1">★</label>
+                </div>
+            </div>
+
+            <!-- What did you order -->
+            <div class="form-group">
+                <label class="form-label">What did you order?</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="ordered" value="litti-platter">
+                        <span>Litti Chokha Platter</span>
+                        <span class="check-icon">✓</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="ordered" value="kaashi-combo">
+                        <span>Kaashi Combo</span>
+                        <span class="check-icon">✓</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="ordered" value="extra-litti">
+                        <span>Extra Litti</span>
+                        <span class="check-icon">✓</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="ordered" value="kheer">
+                        <span>Kheer</span>
+                        <span class="check-icon">✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Taste -->
+            <div class="form-group">
+                <label class="form-label">How would you rate the taste?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="taste" value="excellent">
+                        <span class="radio-circle"></span>
+                        <span>Excellent — just like home!</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="taste" value="good">
+                        <span class="radio-circle"></span>
+                        <span>Good — enjoyed it</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="taste" value="average">
+                        <span class="radio-circle"></span>
+                        <span>Average — could be better</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="taste" value="poor">
+                        <span class="radio-circle"></span>
+                        <span>Not for me</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Portion Size -->
+            <div class="form-group">
+                <label class="form-label">How was the portion size?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="portion" value="too-large">
+                        <span class="radio-circle"></span>
+                        <span>More than enough</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="portion" value="just-right">
+                        <span class="radio-circle"></span>
+                        <span>Just right</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="portion" value="too-small">
+                        <span class="radio-circle"></span>
+                        <span>Could be more</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Would recommend -->
+            <div class="form-group">
+                <label class="form-label">Would you recommend KAASHI to friends?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="definitely">
+                        <span class="radio-circle"></span>
+                        <span>Definitely yes!</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="probably">
+                        <span class="radio-circle"></span>
+                        <span>Probably</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="not-sure">
+                        <span class="radio-circle"></span>
+                        <span>Not sure</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="no">
+                        <span class="radio-circle"></span>
+                        <span>Probably not</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- What can we improve -->
+            <div class="form-group">
+                <label class="form-label">What could we do better?</label>
+                <textarea class="textarea" name="improvements" placeholder="Your suggestions help us improve..."></textarea>
+            </div>
+
+            <!-- What did you love -->
+            <div class="form-group">
+                <label class="form-label">What did you love most?</label>
+                <textarea class="textarea" name="loved" placeholder="Tell us what made you happy..."></textarea>
+            </div>
+
+            <!-- New dishes -->
+            <div class="form-group">
+                <label class="form-label">Any dishes you'd like us to add?</label>
+                <input type="text" class="text-input" name="new_dishes" placeholder="e.g., Puri Sabzi, Malpua, Chaat...">
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+
+            <p class="privacy-note">🔒 Your feedback is <span>completely anonymous</span>.<br>We don't collect any personal information.</p>
+        </form>
+
+        <div class="thank-you" id="thankYou">
+            <div class="thank-you-icon">🙏</div>
+            <h2>धन्यवाद!</h2>
+            <p>Thank you for your valuable feedback.<br>It means the world to us.</p>
+            <a href="index.html" class="back-link">← Back to KAASHI</a>
+        </div>
+    </div>
+
+    <footer>
+        <a href="https://instagram.com/kaashi_dublin">📸 @kaashi_dublin</a>
+    </footer>
+
+    <script>
+        // Form submission handler
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            
+            // Handle checkboxes (multiple values)
+            data.ordered = formData.getAll('ordered');
+            
+            // Handle other fields
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'ordered') {
+                    data[key] = value;
+                }
+            }
+            
+            // Store in localStorage for now (can be sent to a backend later)
+            const feedbacks = JSON.parse(localStorage.getItem('kaashi_feedbacks') || '[]');
+            data.timestamp = new Date().toISOString();
+            feedbacks.push(data);
+            localStorage.setItem('kaashi_feedbacks', JSON.stringify(feedbacks));
+            
+            // Show thank you message
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('thankYou').classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
