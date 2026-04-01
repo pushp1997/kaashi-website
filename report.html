@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Report — KAASHI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-brown: #301A0A;
+            --rich-brown: #653314;
+            --warm-brown: #744924;
+            --burnt-orange: #915122;
+            --copper: #A3643C;
+            --gold: #D19D4C;
+            --cream: #CCA584;
+            --light-cream: #F5E6D3;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--dark-brown);
+            color: var(--light-cream);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 0.2em;
+            text-decoration: none;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            margin-top: 0.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid rgba(209, 157, 76, 0.2);
+        }
+
+        .stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--cream);
+            margin-top: 0.25rem;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(209, 157, 76, 0.2);
+        }
+
+        .chart-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 220px;
+        }
+
+        /* Feedback List */
+        .feedback-section {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.3);
+        }
+
+        .feedback-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--gold);
+        }
+
+        .feedback-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.8;
+        }
+
+        .feedback-rating {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .feedback-text {
+            font-size: 1.05rem;
+            color: var(--light-cream);
+            font-style: italic;
+        }
+
+        .feedback-text:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+
+        .feedback-label {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--cream);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Suggestions List */
+        .suggestions-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .suggestion-tag {
+            background: rgba(209, 157, 76, 0.15);
+            border: 1px solid rgba(209, 157, 76, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: var(--cream);
+        }
+
+        /* Export Button */
+        .export-btn {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-brown);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: transform 0.2s;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--cream);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="logo">KAASHI</a>
+            <h1 class="page-title">📊 FEEDBACK REPORT</h1>
+        </header>
+
+        <div id="content">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
+        <div class="actions" id="actions" style="display: none;">
+            <button class="export-btn" onclick="exportCSV()">📥 Export to CSV</button>
+        </div>
+    </div>
+
+    <footer>
+        Private report — for KAASHI team only
+    </footer>
+
+    <script>
+        // Get feedbacks from localStorage
+        const feedbacks = JSON.parse(localStorage.getItem('kaashi_feedbacks') || '[]');
+        const content = document.getElementById('content');
+
+        if (feedbacks.length === 0) {
+            content.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">📭</div>
+                    <h2>No Feedback Yet</h2>
+                    <p>Responses will appear here once customers submit feedback.</p>
+                </div>
+            `;
+        } else {
+            document.getElementById('actions').style.display = 'block';
+            renderReport();
+        }
+
+        function renderReport() {
+            // Calculate stats
+            const totalResponses = feedbacks.length;
+            const ratings = feedbacks.filter(f => f.rating).map(f => parseInt(f.rating));
+            const avgRating = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : 0;
+            const wouldRecommend = feedbacks.filter(f => f.recommend === 'definitely' || f.recommend === 'probably').length;
+            const recommendPercent = totalResponses ? Math.round((wouldRecommend / totalResponses) * 100) : 0;
+            const excellentTaste = feedbacks.filter(f => f.taste === 'excellent').length;
+
+            // Count ordered items
+            const orderedCounts = {};
+            feedbacks.forEach(f => {
+                if (f.ordered && Array.isArray(f.ordered)) {
+                    f.ordered.forEach(item => {
+                        orderedCounts[item] = (orderedCounts[item] || 0) + 1;
+                    });
+                }
+            });
+
+            // Count ratings
+            const ratingCounts = [0, 0, 0, 0, 0];
+            ratings.forEach(r => ratingCounts[r - 1]++);
+
+            // Count taste
+            const tasteCounts = { excellent: 0, good: 0, average: 0, poor: 0 };
+            feedbacks.forEach(f => { if (f.taste) tasteCounts[f.taste]++; });
+
+            // Count portions
+            const portionCounts = { 'too-large': 0, 'just-right': 0, 'too-small': 0 };
+            feedbacks.forEach(f => { if (f.portion) portionCounts[f.portion]++; });
+
+            // Collect suggestions
+            const newDishes = feedbacks.filter(f => f.new_dishes && f.new_dishes.trim()).map(f => f.new_dishes.trim());
+
+            content.innerHTML = `
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${totalResponses}</div>
+                        <div class="stat-label">Total Responses</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${avgRating}⭐</div>
+                        <div class="stat-label">Avg Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${recommendPercent}%</div>
+                        <div class="stat-label">Would Recommend</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${excellentTaste}</div>
+                        <div class="stat-label">"Like Home!"</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">⭐ RATINGS</div>
+                        <div class="chart-container">
+                            <canvas id="ratingsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">😋 TASTE</div>
+                        <div class="chart-container">
+                            <canvas id="tasteChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">📦 PORTIONS</div>
+                        <div class="chart-container">
+                            <canvas id="portionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">🍽️ POPULAR ITEMS</div>
+                        <div class="chart-container">
+                            <canvas id="ordersChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Dish Suggestions -->
+                ${newDishes.length > 0 ? `
+                <div class="feedback-section">
+                    <h2 class="section-title">🆕 Requested Dishes</h2>
+                    <div class="suggestions-list">
+                        ${newDishes.map(d => `<span class="suggestion-tag">${d}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                <!-- Written Feedback -->
+                <div class="feedback-section">
+                    <h2 class="section-title">💬 Customer Comments</h2>
+                    ${feedbacks.filter(f => f.improvements || f.loved).map(f => `
+                        <div class="feedback-item">
+                            <div class="feedback-meta">
+                                <span>${f.timestamp ? new Date(f.timestamp).toLocaleDateString('en-IE') : 'Unknown date'}</span>
+                                <span class="feedback-rating">${'★'.repeat(parseInt(f.rating || 0))}${'☆'.repeat(5 - parseInt(f.rating || 0))}</span>
+                            </div>
+                            ${f.loved ? `<div class="feedback-label">❤️ Loved:</div><div class="feedback-text">"${f.loved}"</div>` : ''}
+                            ${f.improvements ? `<div class="feedback-label">💡 Improve:</div><div class="feedback-text">"${f.improvements}"</div>` : ''}
+                        </div>
+                    `).join('') || '<p style="color: var(--cream); opacity: 0.7;">No written comments yet.</p>'}
+                </div>
+            `;
+
+            // Create Charts
+            const chartColors = {
+                gold: '#D19D4C',
+                cream: '#CCA584',
+                copper: '#A3643C',
+                burnt: '#915122',
+                brown: '#744924'
+            };
+
+            // Ratings Chart
+            new Chart(document.getElementById('ratingsChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['1★', '2★', '3★', '4★', '5★'],
+                    datasets: [{
+                        data: ratingCounts,
+                        backgroundColor: [chartColors.brown, chartColors.burnt, chartColors.copper, chartColors.cream, chartColors.gold],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { color: '#CCA584', stepSize: 1 }, grid: { color: 'rgba(209,157,76,0.1)' } },
+                        x: { ticks: { color: '#CCA584' }, grid: { display: false } }
+                    }
+                }
+            });
+
+            // Taste Chart
+            new Chart(document.getElementById('tasteChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Excellent', 'Good', 'Average', 'Poor'],
+                    datasets: [{
+                        data: [tasteCounts.excellent, tasteCounts.good, tasteCounts.average, tasteCounts.poor],
+                        backgroundColor: [chartColors.gold, chartColors.cream, chartColors.copper, chartColors.brown],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#CCA584', padding: 15, font: { size: 12 } } }
+                    }
+                }
+            });
+
+            // Portion Chart
+            new Chart(document.getElementById('portionChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['More than enough', 'Just right', 'Could be more'],
+                    datasets: [{
+                        data: [portionCounts['too-large'], portionCounts['just-right'], portionCounts['too-small']],
+                        backgroundColor: [chartColors.gold, chartColors.cream, chartColors.copper],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#CCA584', padding: 15, font: { size: 11 } } }
+                    }
+                }
+            });
+
+            // Orders Chart
+            const itemLabels = {
+                'litti-platter': 'Litti Platter',
+                'kaashi-combo': 'Kaashi Combo',
+                'extra-litti': 'Extra Litti',
+                'kheer': 'Kheer'
+            };
+            new Chart(document.getElementById('ordersChart'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(orderedCounts).map(k => itemLabels[k] || k),
+                    datasets: [{
+                        data: Object.values(orderedCounts),
+                        backgroundColor: chartColors.gold,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, ticks: { color: '#CCA584', stepSize: 1 }, grid: { color: 'rgba(209,157,76,0.1)' } },
+                        y: { ticks: { color: '#CCA584' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Export to CSV
+        function exportCSV() {
+            const headers = ['Date', 'Rating', 'Ordered', 'Taste', 'Portion', 'Recommend', 'Improvements', 'Loved', 'New Dishes'];
+            const rows = feedbacks.map(f => [
+                f.timestamp ? new Date(f.timestamp).toLocaleDateString() : '',
+                f.rating || '',
+                (f.ordered || []).join('; '),
+                f.taste || '',
+                f.portion || '',
+                f.recommend || '',
+                (f.improvements || '').replace(/"/g, '""'),
+                (f.loved || '').replace(/"/g, '""'),
+                (f.new_dishes || '').replace(/"/g, '""')
+            ]);
+
+            let csv = headers.join(',') + '\n';
+            rows.forEach(row => {
+                csv += row.map(cell => `"${cell}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kaashi-feedback-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+    </script>
+</body>
+</html>
