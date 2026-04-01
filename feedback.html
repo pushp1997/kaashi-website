@@ -564,35 +564,59 @@
 
     <script>
         // Form submission handler
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
             
             // Collect form data
             const formData = new FormData(this);
-            const data = {};
+            const data = {
+                timestamp: new Date().toISOString(),
+                rating: formData.get('rating'),
+                ordered: formData.getAll('ordered').join(', '),
+                taste: formData.get('taste'),
+                portion: formData.get('portion'),
+                recommend: formData.get('recommend'),
+                improvements: formData.get('improvements'),
+                loved: formData.get('loved'),
+                new_dishes: formData.get('new_dishes')
+            };
             
-            // Handle checkboxes (multiple values)
-            data.ordered = formData.getAll('ordered');
+            // Send to Google Sheet via Apps Script Web App
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby3tcSA8MNgi0HV0FbV-nvKAGlG9zYIimCEmCBGJWgY2Xf8Ys3P27981a26uj3YwF3wVQ/exec';
             
-            // Handle other fields
-            for (let [key, value] of formData.entries()) {
-                if (key !== 'ordered') {
-                    data[key] = value;
+            try {
+                if (SCRIPT_URL !== 'GOOGLE_SCRIPT_URL_HERE') {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
                 }
+                
+                // Also save locally as backup
+                const feedbacks = JSON.parse(localStorage.getItem('kaashi_feedbacks') || '[]');
+                feedbacks.push(data);
+                localStorage.setItem('kaashi_feedbacks', JSON.stringify(feedbacks));
+                
+                // Show thank you message
+                document.getElementById('feedbackForm').style.display = 'none';
+                document.getElementById('thankYou').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (err) {
+                // Still save locally if network fails
+                const feedbacks = JSON.parse(localStorage.getItem('kaashi_feedbacks') || '[]');
+                feedbacks.push(data);
+                localStorage.setItem('kaashi_feedbacks', JSON.stringify(feedbacks));
+                
+                document.getElementById('feedbackForm').style.display = 'none';
+                document.getElementById('thankYou').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            
-            // Store in localStorage for now (can be sent to a backend later)
-            const feedbacks = JSON.parse(localStorage.getItem('kaashi_feedbacks') || '[]');
-            data.timestamp = new Date().toISOString();
-            feedbacks.push(data);
-            localStorage.setItem('kaashi_feedbacks', JSON.stringify(feedbacks));
-            
-            // Show thank you message
-            document.getElementById('feedbackForm').style.display = 'none';
-            document.getElementById('thankYou').classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
