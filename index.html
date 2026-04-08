@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAASHI — We'll Be Back Soon!</title>
-    <meta name="description" content="KAASHI is temporarily closed. We'll be back on 21st April 2025!">
+    <title>KAASHI — Temporarily Closed</title>
+    <meta name="description" content="KAASHI is temporarily closed. Reopening 21st April 2025.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
             flex-direction: column;
         }
 
-        /* Hero Section */
         .hero {
             flex: 1;
             background: linear-gradient(180deg, var(--dark-brown) 0%, var(--rich-brown) 50%, var(--dark-brown) 100%);
@@ -49,7 +48,6 @@
             position: relative;
         }
 
-        /* Decorative border */
         .hero::before {
             content: '';
             position: absolute;
@@ -69,7 +67,6 @@
             max-width: 500px;
         }
 
-        /* Decorative element */
         .decorative-line {
             display: flex;
             align-items: center;
@@ -109,48 +106,43 @@
             font-style: italic;
         }
 
-        /* Closed Notice */
-        .closed-notice {
+        .notice {
             margin: 2.5rem 0;
-            padding: 2rem;
+            padding: 2.5rem;
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
             border: 1px solid var(--gold);
         }
 
-        .closed-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .closed-title {
+        .notice-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--gold);
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
         }
 
-        .closed-message {
-            font-size: 1.2rem;
+        .notice-message {
+            font-size: 1.15rem;
             color: var(--cream);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             line-height: 1.8;
         }
 
         .reopen-date {
             display: inline-block;
             background: linear-gradient(135deg, var(--burnt-orange), var(--rich-brown));
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border-radius: 8px;
             border: 2px solid var(--gold);
         }
 
         .reopen-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--cream);
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
         }
 
         .reopen-value {
@@ -160,25 +152,14 @@
             font-weight: 700;
         }
 
-        /* Social Link */
         .social-link {
             margin-top: 2rem;
-            padding: 1rem;
-            background: rgba(0,0,0,0.2);
-            border-radius: 8px;
-        }
-
-        .social-link p {
-            font-size: 1rem;
-            color: var(--cream);
-            margin-bottom: 0.5rem;
         }
 
         .social-link a {
             color: var(--gold);
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.1rem;
             transition: opacity 0.3s;
         }
 
@@ -186,16 +167,14 @@
             opacity: 0.8;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 1.5rem;
             color: var(--cream);
-            opacity: 0.7;
+            opacity: 0.6;
             font-size: 0.85rem;
         }
 
-        /* Responsive */
         @media (max-width: 500px) {
             .logo {
                 font-size: 3rem;
@@ -204,8 +183,8 @@
             .tagline {
                 font-size: 1.1rem;
             }
-            .closed-title {
-                font-size: 1.4rem;
+            .notice-title {
+                font-size: 1.3rem;
             }
             .reopen-value {
                 font-size: 1.4rem;
@@ -227,29 +206,27 @@
             
             <div class="decorative-line"><span>✦</span></div>
 
-            <div class="closed-notice">
-                <div class="closed-icon">🏖️</div>
-                <h2 class="closed-title">Taking a Short Break</h2>
-                <p class="closed-message">
-                    We're temporarily closed while we recharge.<br>
-                    Thank you for your love and support!
+            <div class="notice">
+                <h2 class="notice-title">TEMPORARILY CLOSED</h2>
+                <p class="notice-message">
+                    We are currently not accepting orders.<br>
+                    Thank you for your patience.
                 </p>
                 
                 <div class="reopen-date">
-                    <div class="reopen-label">WE'RE BACK ON</div>
+                    <div class="reopen-label">Reopening</div>
                     <div class="reopen-value">21st April 2025</div>
                 </div>
             </div>
 
             <div class="social-link">
-                <p>Follow us for updates:</p>
-                <a href="https://instagram.com/kaashi_dublin">📸 @kaashi_dublin</a>
+                <a href="https://instagram.com/kaashi_dublin">@kaashi_dublin</a>
             </div>
         </div>
     </section>
 
     <footer>
-        See you soon! 🙏
+        Thank you for your support.
     </footer>
 </body>
 </html>
