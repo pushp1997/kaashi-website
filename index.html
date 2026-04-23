@@ -741,8 +741,8 @@
             'extra-ghee': { name: 'Extra Ghee', price: 1, qty: 0 }
         };
 
-        // Google Apps Script URL for form submission
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKASHI_ORDERS_PLACEHOLDER/exec';
+        // OpenClaw webhook for order notifications
+        const WEBHOOK_URL = 'https://lappy.pushp.ovh/webhook/kaashi-order';
 
         function updateQty(item, delta) {
             cart[item].qty = Math.max(0, cart[item].qty + delta);
@@ -842,8 +842,8 @@
             };
 
             try {
-                // Submit to Google Sheets
-                await fetch(GOOGLE_SCRIPT_URL, {
+                // Submit to webhook
+                await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
