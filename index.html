@@ -708,7 +708,7 @@
                     <textarea class="form-input" name="notes" placeholder="Any special requests or allergies?"></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submit-btn">Place Order</button>
+                <button type="submit" class="submit-btn" id="submit-btn">Order via WhatsApp</button>
             </form>
         </div>
     </div>
@@ -809,15 +809,12 @@
             document.body.style.overflow = '';
         }
 
-        async function submitOrder(e) {
+        function submitOrder(e) {
             e.preventDefault();
             
             const form = e.target;
-            const submitBtn = document.getElementById('submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
 
-            // Build order data
+            // Build order items
             let orderItems = [];
             let total = 0;
             
@@ -828,48 +825,38 @@
                 }
             }
 
-            const orderData = {
-                timestamp: new Date().toISOString(),
-                name: form.name.value,
-                phone: form.phone.value,
-                address: form.address.value,
-                day: form.day.value,
-                time: form.time.value || 'Flexible',
-                payment: form.payment.value,
-                notes: form.notes.value || 'None',
-                items: orderItems.join(', '),
-                total: `€${total.toFixed(2)}`
-            };
+            // Build WhatsApp message
+            const message = `🔥 *NEW KAASHI ORDER*
 
-            try {
-                // Submit to webhook
-                await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                });
+*Customer:* ${form.name.value}
+*Phone:* ${form.phone.value}
+*Address:* ${form.address.value}
 
-                // Show success
-                document.getElementById('success-total').textContent = orderData.total;
-                document.getElementById('checkout-modal').classList.remove('active');
-                document.getElementById('success-modal').classList.add('active');
+*Order:*
+${orderItems.join('\n')}
 
-                // Reset cart
-                for (const key of Object.keys(cart)) {
-                    cart[key].qty = 0;
-                    document.getElementById(`qty-${key}`).textContent = 0;
-                }
-                updateCartSummary();
-                form.reset();
+*Total:* €${total.toFixed(2)}
 
-            } catch (error) {
-                alert('Something went wrong. Please try again or order via WhatsApp.');
-                console.error(error);
+*Delivery:* ${form.day.value}${form.time.value ? ', ' + form.time.value : ''}
+*Payment:* ${form.payment.value}
+${form.notes.value ? '\n*Notes:* ' + form.notes.value : ''}`;
+
+            // Open WhatsApp with pre-filled message
+            const whatsappUrl = `https://wa.me/353892117502?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Show success
+            document.getElementById('success-total').textContent = `€${total.toFixed(2)}`;
+            document.getElementById('checkout-modal').classList.remove('active');
+            document.getElementById('success-modal').classList.add('active');
+
+            // Reset cart
+            for (const key of Object.keys(cart)) {
+                cart[key].qty = 0;
+                document.getElementById(`qty-${key}`).textContent = 0;
             }
-
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Place Order';
+            updateCartSummary();
+            form.reset();
         }
 
         // Close modal on outside click
