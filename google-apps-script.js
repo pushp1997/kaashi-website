@@ -1,37 +1,57 @@
-// KAASHI Order Form - Google Apps Script
+// KAASHI - Google Apps Script (Orders + Feedback)
 // 
-// SETUP INSTRUCTIONS:
-// 1. Create a new Google Sheet called "KAASHI Orders"
-// 2. Add these column headers in row 1:
-//    Timestamp | Name | Phone | Address | Day | Time | Payment | Notes | Items | Total | Status
-// 3. Go to Extensions > Apps Script
-// 4. Paste this entire code
-// 5. Click Deploy > New Deployment > Web App
-// 6. Set "Execute as" to "Me" and "Who has access" to "Anyone"
-// 7. Copy the Web App URL and update it in the website's GOOGLE_SCRIPT_URL variable
+// SETUP: 
+// 1. Create TWO sheets in your Google Spreadsheet: "Orders" and "Feedback"
+// 2. Go to Extensions > Apps Script
+// 3. Paste this code and Deploy > New Deployment
 
 function doPost(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
     const data = JSON.parse(e.postData.contents);
     
-    // Append row with order data
-    sheet.appendRow([
-      new Date().toLocaleString('en-IE', { timeZone: 'Europe/Dublin' }),
-      data.name,
-      data.phone,
-      data.address,
-      data.day,
-      data.time,
-      data.payment,
-      data.notes,
-      data.items,
-      data.total,
-      '⏳ Pending'
-    ]);
-    
-    // Send WhatsApp notification via webhook (optional)
-    // You can set up a webhook to notify you of new orders
+    // Detect if this is feedback or order based on fields
+    if (data.rating !== undefined) {
+      // FEEDBACK submission
+      let sheet = ss.getSheetByName('Feedback');
+      if (!sheet) {
+        sheet = ss.insertSheet('Feedback');
+        sheet.appendRow(['Timestamp', 'Rating', 'Items Ordered', 'Taste', 'Portion', 'Would Recommend', 'Improvements', 'Loved', 'New Dishes']);
+      }
+      
+      sheet.appendRow([
+        new Date().toLocaleString('en-IE', { timeZone: 'Europe/Dublin' }),
+        data.rating + ' ⭐',
+        data.ordered || '-',
+        data.taste || '-',
+        data.portion || '-',
+        data.recommend || '-',
+        data.improvements || '-',
+        data.loved || '-',
+        data.new_dishes || '-'
+      ]);
+    } else {
+      // ORDER submission
+      let sheet = ss.getSheetByName('Orders');
+      if (!sheet) {
+        sheet = ss.insertSheet('Orders');
+        sheet.appendRow(['Timestamp', 'Name', 'Phone', 'Address', 'Day', 'Time', 'Payment', 'Notes', 'Items', 'Total', 'Status']);
+      }
+      
+      sheet.appendRow([
+        new Date().toLocaleString('en-IE', { timeZone: 'Europe/Dublin' }),
+        data.name,
+        data.phone,
+        data.address,
+        data.day,
+        data.time,
+        data.payment,
+        data.notes,
+        data.items,
+        data.total,
+        '⏳ Pending'
+      ]);
+    }
     
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'success' }))
@@ -46,6 +66,6 @@ function doPost(e) {
 
 function doGet(e) {
   return ContentService
-    .createTextOutput('KAASHI Order API is running')
+    .createTextOutput('KAASHI API is running')
     .setMimeType(ContentService.MimeType.TEXT);
 }
