@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story — KAASHI</title>
+    <meta name="description" content="The story behind KAASHI — authentic Banarasi food made with love in Dublin.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --dark-brown: #301A0A;
+            --rich-brown: #653314;
+            --warm-brown: #744924;
+            --burnt-orange: #915122;
+            --copper: #A3643C;
+            --gold: #D19D4C;
+            --cream: #CCA584;
+            --light-cream: #F5E6D3;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: linear-gradient(180deg, var(--dark-brown) 0%, var(--rich-brown) 50%, var(--dark-brown) 100%);
+            color: var(--light-cream);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .decorative-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .decorative-line span {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+        }
+
+        /* Story Sections */
+        .story-section {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(209, 157, 76, 0.2);
+        }
+
+        .story-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .story-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-text strong {
+            color: var(--light-cream);
+        }
+
+        .story-text em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .story-signature {
+            font-size: 1.2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Promise Items */
+        .promise-items {
+            text-align: left;
+        }
+
+        .promise-item {
+            font-size: 1.05rem;
+            color: var(--cream);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.1);
+            line-height: 1.7;
+        }
+
+        .promise-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .promise-item strong {
+            color: var(--light-cream);
+        }
+
+        /* Quote */
+        .hindi-quote {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-style: italic;
+            padding: 1.5rem 1rem;
+            border-left: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+            margin: 2rem 0;
+        }
+
+        .hindi-quote-translation {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--cream);
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: var(--gold);
+            color: var(--dark-brown);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(209, 157, 76, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(209, 157, 76, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--cream);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark-brown);
+            border-top: 1px solid rgba(209, 157, 76, 0.3);
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+
+        .bottom-nav a {
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            padding: 0.6rem 0;
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .bottom-nav a .nav-icon { font-size: 1.3rem; }
+
+        .bottom-nav a:hover,
+        .bottom-nav a.active { color: var(--gold); }
+
+        @media (max-width: 500px) {
+            .logo { font-size: 2rem; }
+            .story-section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="logo">KAASHI</a>
+            <div class="decorative-line"><span>✦</span></div>
+            <h1 class="page-title">OUR STORY</h1>
+        </header>
+
+        <!-- The Story -->
+        <div class="story-section">
+            <h2>— FROM BANARAS TO DUBLIN —</h2>
+            <p class="story-text">
+                नमस्ते! I'm <strong>Aashna</strong>, and I grew up in the ghats of <strong>Banaras</strong> — where every meal is a celebration, every recipe holds generations of love, and the aroma of baati fills the air.
+            </p>
+            <p class="story-text">
+                When I moved to Dublin, I missed that taste of home. So I started cooking the food I grew up eating — the same recipes my baba taught me, made with the same love.
+            </p>
+            <p class="story-text">
+                <strong>KAASHI</strong> is my way of sharing a piece of Banaras with you. Every baati is hand-rolled, every chokha freshly pounded. No shortcuts. Just authentic Banarasi soul food, made in my Dublin kitchen.
+            </p>
+            <p class="story-signature">
+                🙏 Aapka swagat hai!
+            </p>
+        </div>
+
+        <!-- Hindi Quote -->
+        <div class="hindi-quote">
+            "बनारस एक शहर नहीं, एक एहसास है"
+            <span class="hindi-quote-translation">Banaras is not a city, it's a feeling</span>
+        </div>
+
+        <!-- Our Promise -->
+        <div class="story-section">
+            <h2>— OUR PROMISE —</h2>
+            <div class="promise-items">
+                <p class="promise-item">🇮🇳 <strong>Spices sourced directly from India</strong> — no substitutes, no shortcuts</p>
+                <p class="promise-item">🫒 Cooked in <strong>pure sarson ka tel</strong> & <strong>desi ghee</strong> — the Banarasi way</p>
+                <p class="promise-item">🙌 <strong>Freshly made to order</strong> — never frozen, never reheated</p>
+                <p class="promise-item">❤️ Every dish prepared with the same love as <strong>ghar ka khaana</strong></p>
+            </div>
+        </div>
+
+        <!-- Connect -->
+        <div class="connect-section">
+            <h2 class="section-title" style="margin-bottom: 1.25rem;">— SAY HELLO —</h2>
+            <p class="story-text">
+                <a href="https://instagram.com/kaashi_dublin" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">📸 @kaashi_dublin</a>
+            </p>
+            <p class="story-text" style="margin-top: 0.5rem;">
+                <a href="https://wa.me/353892117502" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">💬 +353 89 211 7502</a>
+            </p>
+        </div>
+    </div>
+
+    <footer style="padding-bottom: 4rem;">
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="our-story.html" class="active">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+        <a href="index.html">
+            <span class="nav-icon">🛒</span>
+            Order Now
+        </a>
+        <a href="feedback.html">
+            <span class="nav-icon">💬</span>
+            Feedback
+        </a>
+    </nav>
+</body>
+</html>

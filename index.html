@@ -217,6 +217,62 @@
         }
 
         /* Info Strip */
+        /* About Section */
+        .about-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(209, 157, 76, 0.25);
+            border-radius: 12px;
+        }
+
+        .about-content {
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .about-text strong {
+            color: var(--light-cream);
+        }
+
+        .about-text em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .about-signature {
+            font-size: 1.15rem;
+            color: var(--gold);
+            margin-top: 1.25rem;
+            font-style: italic;
+        }
+
+        .promise-items {
+            text-align: left;
+        }
+
+        .promise-item {
+            font-size: 1.05rem;
+            color: var(--cream);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.1);
+            line-height: 1.6;
+        }
+
+        .promise-item:last-child {
+            border-bottom: none;
+        }
+
+        .promise-item strong {
+            color: var(--light-cream);
+        }
+
         .info-strip {
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
@@ -554,6 +610,42 @@
             text-decoration: none;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark-brown);
+            border-top: 1px solid rgba(209, 157, 76, 0.3);
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+
+        .bottom-nav a {
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            padding: 0.6rem 0;
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .bottom-nav a .nav-icon { font-size: 1.3rem; }
+
+        .bottom-nav a:hover,
+        .bottom-nav a.active { color: var(--gold); }
+
         /* Responsive */
         @media (max-width: 400px) {
             .logo {
@@ -656,13 +748,26 @@
             <p>📦 Delivery: <strong>Saturday & Sunday</strong></p>
         </div>
 
-        <footer>
-            ⚠️ Please mention any allergies in the order notes<br><br>
-            <a href="https://instagram.com/kaashi_dublin">📸 @kaashi_dublin</a>
-            <span style="margin: 0 0.5rem;">•</span>
-            <a href="feedback.html">💬 Share Feedback</a>
+        <footer style="padding-bottom: 4rem;">
+            ⚠️ Please mention any allergies in the order notes
         </footer>
     </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="our-story.html">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+        <a href="index.html" class="active">
+            <span class="nav-icon">🛒</span>
+            Order Now
+        </a>
+        <a href="feedback.html">
+            <span class="nav-icon">💬</span>
+            Feedback
+        </a>
+    </nav>
 
     <!-- Cart Summary - Fixed Bottom -->
     <div class="cart-summary" id="cart-summary" style="display: none;">
