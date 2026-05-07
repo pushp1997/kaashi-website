@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAASHI — Taste of Banaras in Dublin</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- v2.1 - WhatsApp direct orders -->
+    <meta name="description" content="Authentic Baati Chokha delivered fresh in Dublin. Homemade Bihari cuisine, just like back home.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-brown: #301A0A;
+            --rich-brown: #653314;
+            --warm-brown: #744924;
+            --burnt-orange: #915122;
+            --copper: #A3643C;
+            --gold: #D19D4C;
+            --cream: #CCA584;
+            --light-cream: #F5E6D3;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--dark-brown);
+            color: var(--light-cream);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            padding-bottom: 100px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 0.2em;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--cream);
+            font-style: italic;
+            margin-top: 0.25rem;
+        }
+
+        /* Menu Section */
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Menu Item Card */
+        .menu-item {
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(209, 157, 76, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--light-cream);
+        }
+
+        .menu-item-price {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .menu-item-desc {
+            font-size: 0.95rem;
+            color: var(--cream);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Quantity Controls */
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--gold);
+            color: var(--dark-brown);
+        }
+
+        .qty-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .qty-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--light-cream);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* Add-ons Section */
+        .addons-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(209, 157, 76, 0.3);
+        }
+
+        .addon-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.15);
+        }
+
+        .addon-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .addon-name {
+            font-size: 1.1rem;
+            color: var(--light-cream);
+        }
+
+        .addon-price {
+            font-size: 0.95rem;
+            color: var(--gold);
+        }
+
+        .addon-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .addon-qty .qty-btn {
+            width: 32px;
+            height: 32px;
+            font-size: 1.2rem;
+        }
+
+        .addon-qty .qty-value {
+            font-size: 1.1rem;
+            min-width: 24px;
+        }
+
+        /* Vegan Badge */
+        .vegan-badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #8BC34A;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Info Strip */
+        /* About Section */
+        .about-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(209, 157, 76, 0.25);
+            border-radius: 12px;
+        }
+
+        .about-content {
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .about-text strong {
+            color: var(--light-cream);
+        }
+
+        .about-text em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .about-signature {
+            font-size: 1.15rem;
+            color: var(--gold);
+            margin-top: 1.25rem;
+            font-style: italic;
+        }
+
+        .promise-items {
+            text-align: left;
+        }
+
+        .promise-item {
+            font-size: 1.05rem;
+            color: var(--cream);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(209, 157, 76, 0.1);
+            line-height: 1.6;
+        }
+
+        .promise-item:last-child {
+            border-bottom: none;
+        }
+
+        .promise-item strong {
+            color: var(--light-cream);
+        }
+
+        .info-strip {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-strip p {
+            margin: 0.4rem 0;
+            color: var(--cream);
+        }
+
+        .info-strip strong {
+            color: var(--gold);
+        }
+
+        /* Cart Summary - Fixed Bottom */
+        .cart-summary {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--dark-brown) 80%, transparent);
+            padding: 1rem 1.5rem 1.5rem;
+            z-index: 100;
+        }
+
+        .cart-summary-inner {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .cart-total-label {
+            font-size: 1.1rem;
+            color: var(--cream);
+        }
+
+        .cart-total-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .cart-items-preview {
+            font-size: 0.85rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--gold);
+            color: var(--dark-brown);
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background: var(--light-cream);
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 200;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .modal {
+            background: var(--dark-brown);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Order Summary in Modal */
+        .order-summary {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            color: var(--cream);
+        }
+
+        .order-line.total {
+            border-top: 1px solid rgba(209, 157, 76, 0.3);
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(209, 157, 76, 0.5);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: var(--light-cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-input::placeholder {
+            color: var(--cream);
+            opacity: 0.5;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-option label {
+            display: block;
+            padding: 0.9rem;
+            border: 1px solid rgba(209, 157, 76, 0.5);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--cream);
+        }
+
+        .radio-option input:checked + label {
+            border-color: var(--gold);
+            background: rgba(209, 157, 76, 0.2);
+            color: var(--gold);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: var(--cream);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .success-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25D366;
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 1.5rem;
+            background: #25D366;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            z-index: 99;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--cream);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark-brown);
+            border-top: 1px solid rgba(209, 157, 76, 0.3);
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+
+        .bottom-nav a {
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            padding: 0.6rem 0;
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .bottom-nav a .nav-icon { font-size: 1.3rem; }
+
+        .bottom-nav a:hover,
+        .bottom-nav a.active { color: var(--gold); }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">KAASHI</h1>
+            <p class="tagline">Taste of Banaras in Dublin</p>
+        </header>
+
+        <!-- Menu -->
+        <section>
+            <h2 class="section-title">— MENU —</h2>
+            
+            <div class="menu-item" data-item="platter" data-price="12">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Baati Chokha Platter</span>
+                    <span class="menu-item-price">€12</span>
+                </div>
+                <p class="menu-item-desc">Smoky baati • spicy chokha • fresh salad</p>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty('platter', -1)">−</button>
+                    <span class="qty-value" id="qty-platter">0</span>
+                    <button class="qty-btn" onclick="updateQty('platter', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-item="combo" data-price="15">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Kaashi Combo</span>
+                    <span class="menu-item-price">€15</span>
+                </div>
+                <p class="menu-item-desc">Platter + Homemade Kheer</p>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty('combo', -1)">−</button>
+                    <span class="qty-value" id="qty-combo">0</span>
+                    <button class="qty-btn" onclick="updateQty('combo', 1)">+</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add-ons -->
+        <section class="addons-section">
+            <h2 class="section-title">— ADD-ONS —</h2>
+            
+            <div class="addon-item" data-item="extra-baati" data-price="2">
+                <div class="addon-info">
+                    <span class="addon-name">Extra Baati</span>
+                    <span class="addon-price">€2</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('extra-baati', -1)">−</button>
+                    <span class="qty-value" id="qty-extra-baati">0</span>
+                    <button class="qty-btn" onclick="updateQty('extra-baati', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="addon-item" data-item="kheer" data-price="3.5">
+                <div class="addon-info">
+                    <span class="addon-name">Kheer</span>
+                    <span class="addon-price">€3.50</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('kheer', -1)">−</button>
+                    <span class="qty-value" id="qty-kheer">0</span>
+                    <button class="qty-btn" onclick="updateQty('kheer', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="addon-item" data-item="extra-ghee" data-price="1">
+                <div class="addon-info">
+                    <span class="addon-name">Extra Ghee</span>
+                    <span class="addon-price">€1</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('extra-ghee', -1)">−</button>
+                    <span class="qty-value" id="qty-extra-ghee">0</span>
+                    <button class="qty-btn" onclick="updateQty('extra-ghee', 1)">+</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="vegan-badge">🌱 Vegan option available — just let us know!</div>
+
+        <!-- Info -->
+        <div class="info-strip">
+            <p>📍 Based in <strong>Dublin 18</strong></p>
+            <p>🚚 <strong>FREE delivery</strong> over €20</p>
+            <p>⏰ Order by <strong>Friday 9 PM</strong></p>
+            <p>📦 Delivery: <strong>Saturday & Sunday</strong></p>
+        </div>
+
+        <footer style="padding-bottom: 4rem;">
+            ⚠️ Please mention any allergies in the order notes
+        </footer>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+        <a href="menu.html" class="active">
+            <span class="nav-icon">🛒</span>
+            Order Now
+        </a>
+        <a href="feedback.html">
+            <span class="nav-icon">💬</span>
+            Feedback
+        </a>
+    </nav>
+
+    <!-- Cart Summary - Fixed Bottom -->
+    <div class="cart-summary" id="cart-summary" style="display: none;">
+        <div class="cart-summary-inner">
+            <div class="cart-total">
+                <span class="cart-total-label">Total</span>
+                <span class="cart-total-value" id="cart-total">€0</span>
+            </div>
+            <div class="cart-items-preview" id="cart-preview"></div>
+            <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">CHECKOUT</h3>
+                <button class="modal-close" onclick="closeCheckout()">✕</button>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary" id="order-summary"></div>
+
+            <!-- Checkout Form -->
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label class="form-label">Name *</label>
+                    <input type="text" class="form-input" name="name" required placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone *</label>
+                    <input type="tel" class="form-input" name="phone" required placeholder="+353 ...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Address *</label>
+                    <textarea class="form-input" name="address" required placeholder="Full address with Eircode"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Delivery Day *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="day" value="Saturday" id="day-sat" required>
+                            <label for="day-sat">Saturday</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="day" value="Sunday" id="day-sun">
+                            <label for="day-sun">Sunday</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Preferred Time</label>
+                    <input type="text" class="form-input" name="time" placeholder="e.g. 12:00 - 14:00">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Payment Method *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="payment" value="Revolut" id="pay-rev" required>
+                            <label for="pay-rev">Revolut</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="payment" value="Cash" id="pay-cash">
+                            <label for="pay-cash">Cash</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Notes / Allergies</label>
+                    <textarea class="form-input" name="notes" placeholder="Any special requests or allergies?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">Order via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal">
+            <div class="success-message">
+                <div class="success-icon">✅</div>
+                <h3 class="success-title">ORDER RECEIVED!</h3>
+                <p class="success-text">
+                    Thank you for your order!<br><br>
+                    We'll confirm your order shortly on WhatsApp.<br><br>
+                    <strong>Order Total: <span id="success-total"></span></strong>
+                </p>
+                <a href="https://wa.me/353892117502" class="success-whatsapp">
+                    💬 Chat with us on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/353892117502?text=Hi!%20I'd%20like%20to%20order%20from%20KAASHI" class="whatsapp-float" title="Order on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        // Cart state
+        const cart = {
+            'platter': { name: 'Baati Chokha Platter', price: 12, qty: 0 },
+            'combo': { name: 'Kaashi Combo', price: 15, qty: 0 },
+            'extra-baati': { name: 'Extra Baati', price: 2, qty: 0 },
+            'kheer': { name: 'Kheer', price: 3.5, qty: 0 },
+            'extra-ghee': { name: 'Extra Ghee', price: 1, qty: 0 }
+        };
+
+        // OpenClaw webhook for order notifications
+        const WEBHOOK_URL = 'https://lappy.pushp.ovh/webhook/kaashi-order';
+
+        function updateQty(item, delta) {
+            cart[item].qty = Math.max(0, cart[item].qty + delta);
+            document.getElementById(`qty-${item}`).textContent = cart[item].qty;
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            let total = 0;
+            let items = [];
+            
+            for (const [key, item] of Object.entries(cart)) {
+                if (item.qty > 0) {
+                    total += item.price * item.qty;
+                    items.push(`${item.qty}× ${item.name}`);
+                }
+            }
+
+            const cartSummary = document.getElementById('cart-summary');
+            const cartTotal = document.getElementById('cart-total');
+            const cartPreview = document.getElementById('cart-preview');
+
+            if (total > 0) {
+                cartSummary.style.display = 'block';
+                cartTotal.textContent = `€${total.toFixed(2)}`;
+                cartPreview.textContent = items.join(' • ');
+            } else {
+                cartSummary.style.display = 'none';
+            }
+        }
+
+        function openCheckout() {
+            // Build order summary
+            let summaryHTML = '';
+            let total = 0;
+            
+            for (const [key, item] of Object.entries(cart)) {
+                if (item.qty > 0) {
+                    const lineTotal = item.price * item.qty;
+                    total += lineTotal;
+                    summaryHTML += `
+                        <div class="order-line">
+                            <span>${item.qty}× ${item.name}</span>
+                            <span>€${lineTotal.toFixed(2)}</span>
+                        </div>
+                    `;
+                }
+            }
+            
+            summaryHTML += `
+                <div class="order-line total">
+                    <span>Total</span>
+                    <span>€${total.toFixed(2)}</span>
+                </div>
+            `;
+
+            document.getElementById('order-summary').innerHTML = summaryHTML;
+            document.getElementById('checkout-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+
+            // Build order items
+            let orderItems = [];
+            let total = 0;
+            
+            for (const [key, item] of Object.entries(cart)) {
+                if (item.qty > 0) {
+                    orderItems.push(`${item.qty}× ${item.name}`);
+                    total += item.price * item.qty;
+                }
+            }
+
+            // Build WhatsApp message
+            const message = `🔥 *NEW KAASHI ORDER*
+
+*Customer:* ${form.name.value}
+*Phone:* ${form.phone.value}
+*Address:* ${form.address.value}
+
+*Order:*
+${orderItems.join('\n')}
+
+*Total:* €${total.toFixed(2)}
+
+*Delivery:* ${form.day.value}${form.time.value ? ', ' + form.time.value : ''}
+*Payment:* ${form.payment.value}
+${form.notes.value ? '\n*Notes:* ' + form.notes.value : ''}`;
+
+            // Open WhatsApp with pre-filled message
+            const whatsappUrl = `https://wa.me/353892117502?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Show success
+            document.getElementById('success-total').textContent = `€${total.toFixed(2)}`;
+            document.getElementById('checkout-modal').classList.remove('active');
+            document.getElementById('success-modal').classList.add('active');
+
+            // Reset cart
+            for (const key of Object.keys(cart)) {
+                cart[key].qty = 0;
+                document.getElementById(`qty-${key}`).textContent = 0;
+            }
+            updateCartSummary();
+            form.reset();
+        }
+
+        // Close modal on outside click
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
