@@ -7,8 +7,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <!-- v2.1 - WhatsApp direct orders -->
-    <meta name="description" content="Authentic Baati Chokha delivered fresh in Dublin. Homemade Bihari cuisine, just like back home.">
+    <!-- v3.0 - New expanded menu May 2026 -->
+    <meta name="description" content="Authentic Banarasi food delivered fresh in Dublin. Litti Chokha, Mutton Curry, Lamb Keema, Malpua & more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
@@ -670,58 +670,168 @@
         <section>
             <h2 class="section-title">— MENU —</h2>
             
-            <div class="menu-item" data-item="platter" data-price="12">
+            <div class="menu-item" data-item="litti-chokha" data-price="12">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Baati Chokha Platter</span>
+                    <span class="menu-item-name">Litti Chokha</span>
                     <span class="menu-item-price">€12</span>
                 </div>
-                <p class="menu-item-desc">Smoky baati • spicy chokha • fresh salad</p>
+                <p class="menu-item-desc">Smoky litti • spicy chokha • fresh salad</p>
                 <div class="qty-controls">
-                    <button class="qty-btn" onclick="updateQty('platter', -1)">−</button>
-                    <span class="qty-value" id="qty-platter">0</span>
-                    <button class="qty-btn" onclick="updateQty('platter', 1)">+</button>
+                    <button class="qty-btn" onclick="updateQty('litti-chokha', -1)">−</button>
+                    <span class="qty-value" id="qty-litti-chokha">0</span>
+                    <button class="qty-btn" onclick="updateQty('litti-chokha', 1)">+</button>
                 </div>
             </div>
 
-            <div class="menu-item" data-item="combo" data-price="15">
+            <div class="menu-item" data-item="dal-litti" data-price="15">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Kaashi Combo</span>
+                    <span class="menu-item-name">Dal Litti</span>
                     <span class="menu-item-price">€15</span>
                 </div>
-                <p class="menu-item-desc">Platter + Homemade Kheer</p>
+                <p class="menu-item-desc">Litti Chokha + Dal Tadka</p>
                 <div class="qty-controls">
-                    <button class="qty-btn" onclick="updateQty('combo', -1)">−</button>
-                    <span class="qty-value" id="qty-combo">0</span>
-                    <button class="qty-btn" onclick="updateQty('combo', 1)">+</button>
+                    <button class="qty-btn" onclick="updateQty('dal-litti', -1)">−</button>
+                    <span class="qty-value" id="qty-dal-litti">0</span>
+                    <button class="qty-btn" onclick="updateQty('dal-litti', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-item="keema-litti" data-price="17">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Keema Litti</span>
+                    <span class="menu-item-price">€17</span>
+                </div>
+                <p class="menu-item-desc">Litti Chokha + Lamb Keema</p>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty('keema-litti', -1)">−</button>
+                    <span class="qty-value" id="qty-keema-litti">0</span>
+                    <button class="qty-btn" onclick="updateQty('keema-litti', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-item="mutton-litti" data-price="20">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Mutton Litti</span>
+                    <span class="menu-item-price">€20</span>
+                </div>
+                <p class="menu-item-desc">Litti Chokha + Goat Meat Curry</p>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty('mutton-litti', -1)">−</button>
+                    <span class="qty-value" id="qty-mutton-litti">0</span>
+                    <button class="qty-btn" onclick="updateQty('mutton-litti', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Shaahi Thaali -->
+            <div class="menu-item" data-item="shaahi-thaali" data-price="25" style="border-color: var(--gold); border-width: 2px;">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">👑 Shaahi Thaali</span>
+                    <span class="menu-item-price">€25</span>
+                </div>
+                <p class="menu-item-desc">Litti Chokha, mutton/lamb, dal, 1 dessert, 1 drink, rice, salad & ghee</p>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty('shaahi-thaali', -1)">−</button>
+                    <span class="qty-value" id="qty-shaahi-thaali">0</span>
+                    <button class="qty-btn" onclick="updateQty('shaahi-thaali', 1)">+</button>
                 </div>
             </div>
         </section>
 
-        <!-- Add-ons -->
+        <!-- Sweets -->
         <section class="addons-section">
-            <h2 class="section-title">— ADD-ONS —</h2>
+            <h2 class="section-title">— SWEETS —</h2>
             
-            <div class="addon-item" data-item="extra-baati" data-price="2">
+            <div class="addon-item" data-item="badaam-halwa" data-price="5">
                 <div class="addon-info">
-                    <span class="addon-name">Extra Baati</span>
-                    <span class="addon-price">€2</span>
+                    <span class="addon-name">Badaam Halwa</span>
+                    <span class="addon-price">€5</span>
                 </div>
                 <div class="addon-qty">
-                    <button class="qty-btn" onclick="updateQty('extra-baati', -1)">−</button>
-                    <span class="qty-value" id="qty-extra-baati">0</span>
-                    <button class="qty-btn" onclick="updateQty('extra-baati', 1)">+</button>
+                    <button class="qty-btn" onclick="updateQty('badaam-halwa', -1)">−</button>
+                    <span class="qty-value" id="qty-badaam-halwa">0</span>
+                    <button class="qty-btn" onclick="updateQty('badaam-halwa', 1)">+</button>
                 </div>
             </div>
 
-            <div class="addon-item" data-item="kheer" data-price="3.5">
+            <div class="addon-item" data-item="malpua" data-price="8">
                 <div class="addon-info">
-                    <span class="addon-name">Kheer</span>
-                    <span class="addon-price">€3.50</span>
+                    <span class="addon-name">Malpua (4 pcs)</span>
+                    <span class="addon-price">€8</span>
                 </div>
                 <div class="addon-qty">
-                    <button class="qty-btn" onclick="updateQty('kheer', -1)">−</button>
-                    <span class="qty-value" id="qty-kheer">0</span>
-                    <button class="qty-btn" onclick="updateQty('kheer', 1)">+</button>
+                    <button class="qty-btn" onclick="updateQty('malpua', -1)">−</button>
+                    <span class="qty-value" id="qty-malpua">0</span>
+                    <button class="qty-btn" onclick="updateQty('malpua', 1)">+</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drinks -->
+        <section class="addons-section">
+            <h2 class="section-title">— DRINKS —</h2>
+            
+            <div class="addon-item" data-item="chaas" data-price="3">
+                <div class="addon-info">
+                    <span class="addon-name">Chaas</span>
+                    <span class="addon-price">€3</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('chaas', -1)">−</button>
+                    <span class="qty-value" id="qty-chaas">0</span>
+                    <button class="qty-btn" onclick="updateQty('chaas', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="addon-item" data-item="mango-lassi" data-price="4">
+                <div class="addon-info">
+                    <span class="addon-name">Mango Lassi</span>
+                    <span class="addon-price">€4</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('mango-lassi', -1)">−</button>
+                    <span class="qty-value" id="qty-mango-lassi">0</span>
+                    <button class="qty-btn" onclick="updateQty('mango-lassi', 1)">+</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extras -->
+        <section class="addons-section">
+            <h2 class="section-title">— EXTRAS —</h2>
+            
+            <div class="addon-item" data-item="extra-litti" data-price="2">
+                <div class="addon-info">
+                    <span class="addon-name">Extra Litti (2 pcs)</span>
+                    <span class="addon-price">€2</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('extra-litti', -1)">−</button>
+                    <span class="qty-value" id="qty-extra-litti">0</span>
+                    <button class="qty-btn" onclick="updateQty('extra-litti', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="addon-item" data-item="extra-chokha" data-price="2">
+                <div class="addon-info">
+                    <span class="addon-name">Extra Chokha</span>
+                    <span class="addon-price">€2</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('extra-chokha', -1)">−</button>
+                    <span class="qty-value" id="qty-extra-chokha">0</span>
+                    <button class="qty-btn" onclick="updateQty('extra-chokha', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="addon-item" data-item="jeera-rice" data-price="3">
+                <div class="addon-info">
+                    <span class="addon-name">Jeera Rice</span>
+                    <span class="addon-price">€3</span>
+                </div>
+                <div class="addon-qty">
+                    <button class="qty-btn" onclick="updateQty('jeera-rice', -1)">−</button>
+                    <span class="qty-value" id="qty-jeera-rice">0</span>
+                    <button class="qty-btn" onclick="updateQty('jeera-rice', 1)">+</button>
                 </div>
             </div>
 
@@ -738,7 +848,7 @@
             </div>
         </section>
 
-        <div class="vegan-badge">🌱 Vegan option available — just let us know!</div>
+        <div class="vegan-badge">🌱 Dal Litti & Litti Chokha are vegan-friendly!</div>
 
         <!-- Info -->
         <div class="info-strip">
@@ -878,10 +988,18 @@
     <script>
         // Cart state
         const cart = {
-            'platter': { name: 'Baati Chokha Platter', price: 12, qty: 0 },
-            'combo': { name: 'Kaashi Combo', price: 15, qty: 0 },
-            'extra-baati': { name: 'Extra Baati', price: 2, qty: 0 },
-            'kheer': { name: 'Kheer', price: 3.5, qty: 0 },
+            'litti-chokha': { name: 'Litti Chokha', price: 12, qty: 0 },
+            'dal-litti': { name: 'Dal Litti', price: 15, qty: 0 },
+            'keema-litti': { name: 'Keema Litti (Lamb)', price: 17, qty: 0 },
+            'mutton-litti': { name: 'Mutton Litti (Goat)', price: 20, qty: 0 },
+            'shaahi-thaali': { name: 'Shaahi Thaali', price: 25, qty: 0 },
+            'badaam-halwa': { name: 'Badaam Halwa', price: 5, qty: 0 },
+            'malpua': { name: 'Malpua (4 pcs)', price: 8, qty: 0 },
+            'chaas': { name: 'Chaas', price: 3, qty: 0 },
+            'mango-lassi': { name: 'Mango Lassi', price: 4, qty: 0 },
+            'extra-litti': { name: 'Extra Litti (2 pcs)', price: 2, qty: 0 },
+            'extra-chokha': { name: 'Extra Chokha', price: 2, qty: 0 },
+            'jeera-rice': { name: 'Jeera Rice', price: 3, qty: 0 },
             'extra-ghee': { name: 'Extra Ghee', price: 1, qty: 0 }
         };
 
